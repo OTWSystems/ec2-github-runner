@@ -20,6 +20,11 @@ inputs:
       EC2 Image Id (AMI). The new runner will be launched from this image.
       This input is required if you use the 'start' mode.
     required: false
+  ec2-instance-count:
+    description: >-
+      Number of EC2 runners to launch, defaults to 1.
+    required: false
+    default: '1'
   ec2-instance-type:
     description: >-
       EC2 Instance Type. 
@@ -43,12 +48,13 @@ inputs:
       The label is used to remove the runner from GitHub when the runner is not needed anymore.
       This input is required if you use the 'stop' mode.
     required: false
-  ec2-instance-id:
+  ec2-instance-ids:
     description: >-
-      EC2 Instance Id of the created runner.
+      EC2 Instance Id(s) of the created runner(s).
       The id is used to terminate the EC2 instance when the runner is not needed anymore.
       This input is required if you use the 'stop' mode.
     required: false
+    default: 'null'
   iam-role-name:
     description: >-
       IAM Role Name to attach to the created EC2 instance.
@@ -77,9 +83,9 @@ outputs:
       The label is used in two cases:
       - to use as the input of 'runs-on' property for the following jobs;
       - to remove the runner from GitHub when it is not needed anymore.
-  ec2-instance-id:
+  ec2-instance-ids:
     description: >-
-      EC2 Instance Id of the created runner.
+      EC2 Instance Id(s) of the created runner(s).
       The id is used to terminate the EC2 instance when the runner is not needed anymore.
 runs:
   using: node20
